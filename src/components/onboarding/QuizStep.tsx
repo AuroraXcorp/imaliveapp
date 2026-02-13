@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ArrowLeft } from "lucide-react";
 
 interface QuizOption {
   label: string;
@@ -13,9 +13,10 @@ interface QuizStepProps {
   stepNumber: number;
   totalSteps: number;
   onSelect: (answer: string) => void;
+  onBack?: () => void;
 }
 
-const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelect }: QuizStepProps) => {
+const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelect, onBack }: QuizStepProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: 50 }}
@@ -24,6 +25,14 @@ const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelec
       transition={{ duration: 0.3 }}
       className="flex flex-col min-h-screen px-6 py-8"
     >
+      {/* Back button */}
+      {onBack && (
+        <button onClick={onBack} className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors mb-4 -mt-2 self-start">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-sm">Back</span>
+        </button>
+      )}
+
       {/* Progress bar */}
       <div className="w-full h-1.5 bg-secondary rounded-full mb-8">
         <motion.div
