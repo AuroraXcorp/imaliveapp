@@ -219,6 +219,10 @@ const OnboardingQuiz = () => {
     setStep((s) => s + 1);
   };
 
+  const handleBack = () => {
+    setStep((s) => Math.max(0, s - 1));
+  };
+
   return (
     <div className="min-h-screen bg-background max-w-lg mx-auto">
       <AnimatePresence mode="wait">
@@ -233,6 +237,7 @@ const OnboardingQuiz = () => {
             stepNumber={step}
             totalSteps={TOTAL_QUIZ}
             onSelect={handleQuizAnswer}
+            onBack={handleBack}
           />
         )}
 
