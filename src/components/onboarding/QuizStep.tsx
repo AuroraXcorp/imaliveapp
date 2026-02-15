@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronRight, ArrowLeft } from "lucide-react";
+import useClickSound from "@/hooks/use-click-sound";
 
 interface QuizOption {
   label: string;
@@ -17,6 +18,13 @@ interface QuizStepProps {
 }
 
 const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelect, onBack }: QuizStepProps) => {
+  const playClick = useClickSound();
+
+  const handleSelect = (label: string) => {
+    playClick();
+    onSelect(label);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 50 }}
@@ -58,7 +66,7 @@ const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelec
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * i }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => onSelect(option.label)}
+            onClick={() => handleSelect(option.label)}
             className="w-full flex items-center justify-between p-4 rounded-xl bg-secondary hover:bg-secondary/80 border border-border hover:border-primary/50 transition-all text-left group"
           >
             <div className="flex items-center gap-3">
