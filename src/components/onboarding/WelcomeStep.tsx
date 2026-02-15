@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Heart, Shield, Bell } from "lucide-react";
+import { Shield, Bell, Heart } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 interface WelcomeStepProps {
   onNext: () => void;
@@ -13,23 +14,23 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
       exit={{ opacity: 0, y: -20 }}
       className="flex flex-col items-center justify-center min-h-screen px-6 py-12 text-center"
     >
-      <motion.div
+      <motion.img
+        src={logo}
+        alt="I'm Alive logo"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-        className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mb-8"
-      >
-        <Heart className="w-12 h-12 text-primary" />
-      </motion.div>
+        className="w-48 h-48 mb-4 object-contain"
+      />
 
-      <motion.h1
+      <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="text-4xl font-bold font-display mb-4"
+        className="text-muted-foreground text-lg mb-10 max-w-xs"
       >
-        I'm <span className="text-gradient">Alive</span>
-      </motion.h1>
+        Peace of mind for you and your loved ones, every single day.
+      </motion.p>
 
       <motion.p
         initial={{ opacity: 0 }}
