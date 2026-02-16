@@ -59,18 +59,18 @@ const NotificationStep = ({ onNext, onBack, totalSteps }: NotificationStepProps)
       </p>
 
       {/* Notification illustration */}
-      <div className="flex flex-col items-center my-8">
+      <div className="flex flex-col items-center my-6">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+          className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-3"
         >
           <motion.div
             animate={{ rotate: [0, -12, 12, -8, 8, 0] }}
             transition={{ duration: 0.6, delay: 0.5, repeat: Infinity, repeatDelay: 3 }}
           >
-            <Bell className="w-12 h-12 text-primary" />
+            <Bell className="w-8 h-8 text-primary" />
           </motion.div>
         </motion.div>
         <p className="text-muted-foreground/70 text-xs text-center max-w-[240px]">
