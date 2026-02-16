@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { Bell, BellRing } from "lucide-react";
+import { Bell, BellRing, ArrowLeft } from "lucide-react";
 import useClickSound from "@/hooks/use-click-sound";
 
 interface NotificationStepProps {
   onNext: () => void;
+  onBack?: () => void;
+  totalSteps: number;
 }
 
-const NotificationStep = ({ onNext }: NotificationStepProps) => {
+const NotificationStep = ({ onNext, onBack, totalSteps }: NotificationStepProps) => {
   const playClick = useClickSound();
 
   const handleEnable = async () => {
@@ -28,43 +30,53 @@ const NotificationStep = ({ onNext }: NotificationStepProps) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="flex flex-col items-center justify-center min-h-screen px-6 py-8 text-center"
+      className="flex flex-col min-h-screen px-6 py-8"
     >
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.15 }}
-        className="w-20 h-20 rounded-full bg-primary/15 flex items-center justify-center mb-6"
-      >
-        <BellRing className="w-10 h-10 text-primary" />
-      </motion.div>
+      {/* Back button */}
+      {onBack && (
+        <button onClick={onBack} className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors mb-4 -mt-2 self-start">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-sm">Back</span>
+        </button>
+      )}
 
-      <h2 className="text-2xl font-bold font-display mb-3">
-        Enable Notifications
-      </h2>
-      <p className="text-muted-foreground text-sm mb-2 max-w-xs">
+      {/* Progress bar */}
+      <div className="w-full h-1.5 bg-secondary rounded-full mb-8">
+        <motion.div
+          className="h-full bg-primary rounded-full"
+          initial={{ width: `${((totalSteps - 1) / totalSteps) * 100}%` }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 0.5 }}
+        />
+      </div>
+
+      <h2 className="text-2xl font-bold font-display mb-2">Enable Notifications</h2>
+      <p className="text-muted-foreground text-sm mb-10">
         Get instant alerts when your loved one checks in — or if they don't.
       </p>
-      <p className="text-muted-foreground/70 text-xs mb-10 max-w-xs">
-        You can change this anytime in your settings.
-      </p>
 
-      <div className="w-full flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mt-4">
         <motion.button
-          whileTap={{ scale: 0.97 }}
+          whileTap={{ scale: 0.98 }}
           onClick={handleEnable}
-          className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg btn-glow flex items-center justify-center gap-2"
+          className="w-full flex items-center justify-between p-4 rounded-xl bg-secondary hover:bg-secondary/80 border border-border hover:border-primary/50 transition-all text-left group"
         >
-          <Bell className="w-5 h-5" />
-          Allow Notifications
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🔔</span>
+            <span className="text-foreground font-medium">Yes, allow notifications</span>
+          </div>
         </motion.button>
 
-        <button
+        <motion.button
+          whileTap={{ scale: 0.98 }}
           onClick={handleSkip}
-          className="text-muted-foreground text-sm hover:text-foreground transition-colors py-2"
+          className="w-full flex items-center justify-between p-4 rounded-xl bg-secondary hover:bg-secondary/80 border border-border hover:border-primary/50 transition-all text-left group"
         >
-          Maybe later
-        </button>
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">⏭️</span>
+            <span className="text-foreground font-medium">Maybe later</span>
+          </div>
+        </motion.button>
       </div>
     </motion.div>
   );

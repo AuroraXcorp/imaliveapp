@@ -242,7 +242,7 @@ const OnboardingQuiz = () => {
           />
         )}
 
-        {step === TOTAL_QUIZ + 1 && <NotificationStep key="notification" onNext={() => setStep(TOTAL_QUIZ + 2)} />}
+        {step === TOTAL_QUIZ + 1 && <NotificationStep key="notification" onNext={() => setStep(TOTAL_QUIZ + 2)} onBack={handleBack} totalSteps={TOTAL_QUIZ + 1} />}
 
         {step === TOTAL_QUIZ + 2 && <ResultStep key="result" onNext={() => setStep(TOTAL_QUIZ + 3)} />}
         
