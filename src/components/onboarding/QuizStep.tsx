@@ -51,10 +51,6 @@ const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelec
         />
       </div>
 
-      <span className="text-muted-foreground text-sm mb-2 uppercase tracking-wider">
-        Step {stepNumber} of {totalSteps}
-      </span>
-
       <h2 className="text-2xl font-bold font-display mb-2">{question}</h2>
       {subtitle && <p className="text-muted-foreground text-sm mb-8">{subtitle}</p>}
 
