@@ -62,10 +62,7 @@ const QuizStep = ({ question, subtitle, options, stepNumber, totalSteps, onSelec
         {options.map((option, i) => (
           <motion.button
             key={i}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * i }}
-            whileTap={{ scale: 0.98 }}
+             whileTap={{ scale: 0.98 }}
             onClick={() => handleSelect(option.label)}
             className="w-full flex items-center justify-between p-4 rounded-xl bg-secondary hover:bg-secondary/80 border border-border hover:border-primary/50 transition-all text-left group"
           >
