@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import WelcomeStep from "./WelcomeStep";
 import QuizStep from "./QuizStep";
-import NotificationStep from "./NotificationStep";
 import ResultStep from "./ResultStep";
 import OfferStep from "./OfferStep";
 import PricingStep from "./PricingStep";
@@ -211,7 +210,7 @@ const quizSteps = [
 ];
 
 const TOTAL_QUIZ = quizSteps.length; // 20
-// step 0 = welcome, 1-20 = quiz, 21 = notification, 22 = result, 23 = offer, 24 = pricing
+// step 0 = welcome, 1-20 = quiz, 21 = result, 22 = offer, 23 = pricing
 
 const OnboardingQuiz = () => {
   const [step, setStep] = useState(0);
@@ -242,13 +241,11 @@ const OnboardingQuiz = () => {
           />
         )}
 
-        {step === TOTAL_QUIZ + 1 && <NotificationStep key="notification" onNext={() => setStep(TOTAL_QUIZ + 2)} onBack={handleBack} totalSteps={TOTAL_QUIZ + 1} />}
-
-        {step === TOTAL_QUIZ + 2 && <ResultStep key="result" onNext={() => setStep(TOTAL_QUIZ + 3)} />}
+        {step === TOTAL_QUIZ + 1 && <ResultStep key="result" onNext={() => setStep(TOTAL_QUIZ + 2)} />}
         
-        {step === TOTAL_QUIZ + 3 && <OfferStep key="offer" onNext={() => setStep(TOTAL_QUIZ + 4)} />}
+        {step === TOTAL_QUIZ + 2 && <OfferStep key="offer" onNext={() => setStep(TOTAL_QUIZ + 3)} />}
 
-        {step === TOTAL_QUIZ + 4 && <PricingStep key="pricing" />}
+        {step === TOTAL_QUIZ + 3 && <PricingStep key="pricing" />}
       </AnimatePresence>
     </div>
   );
